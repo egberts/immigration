@@ -15,5 +15,5 @@ fig = go.Figure(data=[go.Sankey(
     ))])
 
 fig.update_layout(title_text="Simple Sankey Diagram using plotly in Python.", font_size=10)
-#fig.update_layout(hovermode="x")
+#fig_go_layout.update_layout(hovermode="x")
 fig.show()

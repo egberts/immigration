@@ -96,4 +96,4 @@ for d in diagrams:
 plt.tight_layout()
 plt.show()
 # # now save the image
-# fig.savefig("my_sankey.pdf",bbox_inches="tight",dpi=800)
+# fig_go_layout.savefig("my_sankey.pdf",bbox_inches="tight",dpi=800)

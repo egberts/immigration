@@ -1,4 +1,4 @@
-# Get this figure: fig = py.get_figure("https://plotly.com/~PlotBot/880/")
+# Get this figure: fig_go_layout = py.get_figure("https://plotly.com/~PlotBot/880/")
 # Get this figure's data: data = py.get_figure("https://plotly.com/~PlotBot/880/").get_data()
 # Add data to this figure: py.plot(Data([Scatter(x=[1, 2], y=[2, 3])]), filename ="marker-h-bar", fileopt="extend")
 # Get y data of first trace: y1 = py.get_figure("https://plotly.com/~PlotBot/880/").get_data()[0]["y"]
@@ -48,5 +48,5 @@ data = Data([trace1, trace2])
 layout = {"barmode": "stack"}
 fig = Figure(data=data, layout=layout)
 fig.show()
-#plot_url = py.plot(fig)
+#plot_url = py.plot(fig_go_layout)
 #print("plot_url: ", plot_url)
