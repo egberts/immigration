@@ -1,34 +1,73 @@
 # imports
+import errno
 import pprint
+import sys
+import textwrap
 
 import pandas as pd
 import plotly
-import sys
-import errno
+
+
+def custom_wrap(s, width=15):
+    return "<br>".join(textwrap.wrap(s, width=width))
+
 
 # import plotly.graph_objs as go
 my_domain = plotly.graph_objs.sankey.Domain()
+my_domain.x = (1, 0)
+my_domain.y = (0, 1)
+my_domain.row = 4
+my_domain.column = 9
 print("my_domain.plotly_name: ", my_domain.plotly_name)
 print("my_domain.parent: ", my_domain.parent)
 print("my_domain.figure: ", my_domain.figure)
-my_domain.x = (0, 1)
-my_domain.y = (1, 0)
-my_domain.row = 4
-my_domain.column = 9
+print("my_domain.row: ", my_domain.row)
+print("my_domain.column: ", my_domain.column)
+print("my_domain.x: ", my_domain.x)
+print("my_domain.y: ", my_domain.y)
 
 # Nodes & links
 nodes = [
     ['ID', 'Label', 'Color'],
-    [10, 'Gotaways\n250000', 'red'],
+    [1, custom_wrap('Gotaways 600,000', 12), 'red'],
+    [96, custom_wrap('Gotaway 600,000', 12), 'red'],
     [2, 'Entrances', '#D4C1FA'],
-    [3, 'Humanitarian Parole', 'darkorange'],
-    [4, 'Affirmative Asylum Applications', 'darkorange'],
+    [
+        3,
+        custom_wrap('Humanitarian Parole', 15),
+        'darkorange'
+    ],
+    [
+        4,
+        custom_wrap('Affirmative Asylum Applications', 15),
+        'darkorange'
+    ],
 
-    [11, 'Northern Border Encounters', '#4994CE'],
-    [12, 'Southern Border Encounters', 'darkorchid'],
-    [13, 'Western Border Encounters', '#449E9E'],
-    [14, 'Eastern Border Encounters', '#7FC241'],
-    [15, 'Other Border Encounters', '#D3D3D3'],
+    [
+        11,
+        custom_wrap('Northern Border Encounters', 15),
+        '#4994CE'
+    ],
+    [
+        12,
+        custom_wrap('Southern Border Encounters', 13),
+        'darkorchid'
+    ],
+    [
+        13,
+        custom_wrap('Western Border Encounters', 15),
+        '#449E9E'
+    ],
+    [
+        14,
+        custom_wrap('Eastern Border Encounters', 15),
+        '#7FC241'
+    ],
+    [
+        15,
+        custom_wrap('Other Border Encounters', 15),
+        '#D3D3D3'
+    ],
 
     [20, 'Encounters', '#8A5988'],
 
@@ -37,7 +76,11 @@ nodes = [
 
     [41, 'Expedited Retained', 'blue'],
     [42, 'NTA (Detained)', 'red'],
-    [43, 'NTA in Court (Released)', 'green'],
+    [
+        43,
+        custom_wrap('NTA in Court (Released)', 15),
+        'goldenrod'
+    ],
     [44, 'Other*', 'purple'],
     [45, 'Paroled', 'orange'],
 
@@ -45,18 +88,26 @@ nodes = [
     [47, 'Denied', 'black'],
     [48, 'Added to Backlog', 'lightsalmon'],
 
-    [50, 'Enter Processing', 'purple'],
+    [50, 'Enter Processing', 'orange'],
 
     [60, 'Processed', 'purple'],
 
     [70, 'Voluntary Departure', 'blue'],
     [71, 'Relief Denied', 'red'],
-    [72, 'Relief Granted in Court', 'green'],
+    [
+        72,
+        custom_wrap('Relief Granted in Court', 15),
+        'green'
+    ],
     [73, 'Case altered', 'yellow'],
 
-    [97, 'Deported (Removal Order)', 'red'],
-    [98, 'Formal Relief (Granted)', 'green'],
-    [99, 'Proceedings (Ongoing/Temporary Relief)', 'yellow'],
+    [
+        97,
+        custom_wrap('Deported (Removal Order)', 15),
+        'red'
+    ],
+    [98, custom_wrap('Formal Relief (Granted)', 15), 'green'],
+    [99, custom_wrap('Proceedings (Ongoing/Temporary Relief)', 15), 'yellow'],
 ]
 
 # links with your data
@@ -64,12 +115,7 @@ links = [
     ['Source', 'Target', 'Value', 'Link Color', 'Label'],
 
     # Entrance (pre-government transitory)
-    [2, 10, 250000, 'lightpink', 'Gotaways'],  # entrances to gotaways
-
-    [3, 99, 240000, 'orange', 'Humanitarian Parole'],
-    [4, 46, 18000, 'green', 'Approved Affirmative Asylum Applications'],
-    [4, 47, 6000, 'red', 'Denied Affirmative Asylum Applications'],
-    [4, 48, 440000, 'orange', 'Added to Backlog'],
+    [1, 96, 600000, 'lightpink', '"Gotaways"<br>600,000'],  # entrances to gotaways
 
     [2, 11, 0, 'darkgray', 'Northern Border Entrance'],
     [2, 12, 2500000, 'darkgray', 'Southern Border Entrance'],
@@ -77,29 +123,37 @@ links = [
     [2, 14, 0, 'darkgray', 'Easter Border Entrance'],
     [2, 15, 0, 'darkgray', 'Other Border Entrance'],
 
+#    [2, 2, 800000, 'lightgreen', 'Repeat<br>Multiple Attempts'],
+    #
     [11, 20, 0, 'darkgray', 'Northern Border'],
     [12, 20, 2500000, 'darkgray', 'Southern Border'],
     [13, 20, 0, 'darkgray', 'Western Border'],
     [14, 20, 0, 'darkgray', 'Eastern Border'],
     [15, 20, 0, 'darkgray', 'Other borders'],
 
+    [3, 99, 240000, 'lightgreen', 'Humanitarian Parole'],
+
+    [4, 46, 18000, 'lightblue', 'Approved Affirmative Asylum Applications'],
+    [4, 47, 6000, 'red', 'Denied Affirmative Asylum Applications'],
+    [4, 48, 440000, 'orange', 'Added to Backlog'],
+
     [20, 30, 565000, 'lightsalmon', 'Title 42'],  # Title 42
     [20, 31, 1900000, 'lightgreen', 'Title 8'],  # Title 8
 
     [30, 97, 565000, 'lightsalmon', 'EEEE'],  # Title 42
 
-    [31, 97, 135000, 'red', 'Voluntary Departure'],
-    [31, 97, 230000, 'blue', 'Expedited Removal'],
+    [31, 97, 135000, 'lightsalmon', 'Voluntary Departure'],
+    [31, 97, 230000, 'red', 'Expedited Removal'],
     [31, 42, 230000, 'red', 'Notice To Appear (Detained)'],
-    [31, 43, 965000, 'yellow', 'Notice to Appear in Court (Released)'],
-    [31, 99, 350000, 'orange', 'Paroled'],
+    [31, 43, 965000, 'goldenrod', 'Notice to Appear in Court (Released)'],
+    [31, 45, 350000, 'orange', 'Paroled'],
 
     [42, 50, 230000, 'orange', 'NTA (Detained)'],
-    [43, 50, 965000, 'yellow', 'Immigration Court'],
+    [43, 50, 965000, 'goldenrod', 'Immigration Court'],
     [44, 50, 250000, 'purple', 'Others'],
-
+    [45, 97, 350000, 'red', 'Paroled'],
     [46, 98, 18000, 'rgba(127, 194, 65, 0.2)', 'Approved'],
-    [47, 99, 18000, 'red', 'Denied'],
+    [47, 97, 18000, 'red', 'Denied'],
     [48, 99, 415000, 'orange', 'AAA Added to Backlog'],
 
     [50, 60, 100000, 'gray', 'Processed'],
@@ -123,7 +177,7 @@ for this_idx in range(1, len(nodes)):
         print("Node[0] already done: ", nodes[this_idx])
         break
     # Training index
-    old_idx: int = nodes[this_idx][0]
+    old_idx: int = int(nodes[this_idx][0])
     # Remapping index
     mapped_idx.insert(new_idx, old_idx)
     # Remapping index
@@ -153,7 +207,7 @@ df_links = pd.DataFrame(links, columns=links_headers)
 
 # Sankey plot setup
 my_link = plotly.graph_objs.sankey.Link()
-### my_link.arrowlen = 15
+my_link.arrowlen = 15
 my_link.source = df_links['Source'].dropna(axis=0, how='any')
 my_link.target = df_links['Target'].dropna(axis=0, how='any')
 my_link.value = df_links['Value'].dropna(axis=0, how='any')
@@ -163,11 +217,11 @@ my_link.label = df_links['Label'].dropna(axis=0, how='any')
 my_node = plotly.graph_objs.sankey.Node()
 my_node.color = df_nodes['Color'].dropna(axis=0, how='any')
 my_node.label = df_nodes['Label'].dropna(axis=0, how='any')
-my_node.line = dict(color='black', width=0)
+my_node.line = dict(color='black', width=1)
 my_node.pad = 10
 my_node.thickness = 30
-
-#my_node.groups = [0, 1]
+my_node.hoverinfo = None  # 'none', 'skip'
+#my_node.groups = 5
 #my_node.align = 'right'  # we have too many floating nodes, need node-grouping assist
 #my_node = dict(
 #    pad=10,
@@ -181,77 +235,23 @@ my_node.thickness = 30
 #    color=df_nodes['Color']
 #)
 
-my_data = plotly.graph_objs.Sankey()
-my_data.arrangement = 'freeform'
-my_data.domain = dict(x=[0, 1], y=[0, 1])
-my_data.orientation = 'h'
-my_data.valueformat = '.0f'
-my_data.link = my_link
-my_data.node = my_node
-
+my_sankey = plotly.graph_objs.Sankey()
+my_sankey.arrangement = 'freeform'  # 'perpendicular', 'snap', 'fixed', 'freeform'
+my_sankey.orientation = 'h'
+my_sankey.valueformat = '.0f'
+my_sankey.domain = my_domain
+my_sankey.link = my_link
+my_sankey.node = my_node
 
 my_layout = plotly.graph_objs.Layout()
-my_layout.title = "US Border Encounters & Enforcement"
-my_layout.height = 772
-my_layout.font = dict(size=10)
-print('my_layout.figure: ', my_layout.figure)
-print('my_layout.parent: ', my_layout.parent)
-print('my_layout.plotly_name: ', my_layout.plotly_name)
-print('my_layout.margin: ', my_layout.margin)
-print('my_layout.margin.b: ', my_layout.margin.b)
-print('my_layout.margin.t: ', my_layout.margin.t)
-print('my_layout.margin.r: ', my_layout.margin.r)
-print('my_layout.margin.l: ', my_layout.margin.l)
-print('my_layout.margin.parent: ', my_layout.margin.parent)
-print('my_layout.margin.figure: ', my_layout.margin.figure)
-print('my_layout.margin.autoexpand: ', my_layout.margin.autoexpand)
-print('my_layout.margin.pad: ', my_layout.margin.pad)
-print('my_layout.uirevision: ', my_layout.uirevision)
-print('my_layout.meta: ', my_layout.meta)
-print('my_layout.legend: ', my_layout.legend)
-print('my_layout.legend.plotly_name: ', my_layout.legend.plotly_name)
-print('my_layout.legend.uirevision: ', my_layout.legend.uirevision)
-print('my_layout.legend.bgcolor: ', my_layout.legend.bgcolor)
-print('my_layout.legend.bordercolor: ', my_layout.legend.bordercolor)
-print('my_layout.legend.borderwidth: ', my_layout.legend.borderwidth)
-print('my_layout.legend.entrywidth: ', my_layout.legend.entrywidth)
-print('my_layout.legend.entrywidthmode: ', my_layout.legend.entrywidthmode)
-print('my_layout.legend.figure: ', my_layout.legend.figure)
-print('my_layout.legend.font: ', my_layout.legend.font)
-print('my_layout.legend.groupclick: ', my_layout.legend.groupclick)
-print('my_layout.legend.grouptitlefront: ', my_layout.legend.grouptitlefont)
-print('my_layout.legend.itemclick: ', my_layout.legend.itemclick)
-print('my_layout.legend.itemwidth: ', my_layout.legend.itemwidth)
-print('my_layout.legend.itemsizing: ', my_layout.legend.itemsizing)
-print('my_layout.legend.indentation: ', my_layout.legend.indentation)
-print('my_layout.legend.orientation: ', my_layout.legend.orientation)
-print('my_layout.legend.parent: ', my_layout.legend.parent)
-print('my_layout.legend.title: ', my_layout.legend.title)
-print('my_layout.legend.traceorder: ', my_layout.legend.traceorder)
-print('my_layout.legend.tracegroupgap: ', my_layout.legend.tracegroupgap)
-print('my_layout.legend.valign: ', my_layout.legend.valign)
-print('my_layout.legend.visible: ', my_layout.legend.visible)
-print('my_layout.legend.x: ', my_layout.legend.x)
-print('my_layout.legend.xref: ', my_layout.legend.xref)
-print('my_layout.legend.xanchor: ', my_layout.legend.xanchor)
-print('my_layout.legend.y: ', my_layout.legend.y)
-print('my_layout.legend.yref: ', my_layout.legend.yref)
-print('my_layout.legend.yanchor: ', my_layout.legend.yanchor)
-print('my_layout.height: ', my_layout.height)
-print('my_layout.width: ', my_layout.width)
-print('my_layout.xaxis.plotly_name: ', my_layout.xaxis.plotly_name)
-print('my_layout.xaxis: ', my_layout.xaxis.uirevision)
-print('my_layout.xaxis: ', my_layout.xaxis.anchor)
-print('my_layout.xaxis: ', my_layout.xaxis.automargin)
-print('my_layout.xaxis: ', my_layout.xaxis.autorange)
-print('my_layout.xaxis: ', my_layout.xaxis.autorangeoptions)
-print('my_layout.xaxis: ', my_layout.xaxis.autotickangles)
-print('my_layout.xaxis: ', my_layout.xaxis.autotickangles)
-print('my_layout.yaxis: ', my_layout.yaxis)
+my_layout.title = "US Border Encounters & Enforcement 2022"
+#my_layout.height = 772
+my_layout.font = dict(size=16)
 
-fig = plotly.graph_objs.Figure(data=[my_data])
+fig = plotly.graph_objs.Figure(data=[my_sankey], layout=my_layout)
 # could have used fig.add_sankey(link=())
 fig.layout = my_layout
+
 fig.layout.xaxis = {
     'showgrid': False,  # thin lines in the background
     'zeroline': False,  # thick line at x=0
@@ -263,10 +263,10 @@ fig.layout.yaxis = {
     'visible': False,  # numbers below
 }
 fig.layout.autosize = True
-fig.layout.width = 640*2
-fig.layout.height = 480*1.55
+#fig.layout.width = 640*1.8
+#fig.layout.height = 480*1.55
 fig.layout.plot_bgcolor = 'rgba(0,0,0,0)'
-fig.layout.margin = {'l': 25, 'r': 25, 't': 50, 'b': 0}
+fig.layout.margin = {'l': 25, 'r': 75, 't': 70, 'b': 0}
 for x_coordinate, column_name in enumerate(["Entrances", "Encounters", "Court Processing", "End Results"]):
     fig.add_annotation(
         x=x_coordinate,
@@ -282,10 +282,12 @@ for x_coordinate, column_name in enumerate(["Entrances", "Encounters", "Court Pr
         ),
         align="center",
     )
+
 fig.show()
+fig.write_image(file="/tmp/panda-plotly-test1.png")
 
 pp = pprint.PrettyPrinter(indent=4)
 pp.pprint(fig)
-# plotly.io.to_json(fig))
 
+# plotly.io.to_json(fig))
 # iplot(fig, validate=False)

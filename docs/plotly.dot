@@ -1,0 +1,35 @@
+
+digraph plotly {
+
+Figure -> "Data(Sankey)";
+Figure -> Layout;
+Figure -> "Data(Sankey)";
+
+"Data(Sankey)" -> Arrangement;
+"Data(Sankey)" -> Domain;
+"Data(Sankey)" -> Link;
+"Data(Sankey)" -> _Node;
+"Data(Sankey)" -> Layout;
+
+Arrangement;
+
+Domain;
+
+Link -> Colorscales;
+Link -> Hoverlabel;
+Link -> Line;
+
+_Node -> Line;
+_Node -> Hoverlabel;
+
+Layout -> Annotation, Margin, Legend, Font, Title, Xaxis, Yaxis;
+
+Annotation -> Hoverlabel;
+
+Hoverlabel -> Font;
+
+Legend -> Font, Grouptitlefont;
+
+Xaxis -> Autorangeoption;
+Yaxis -> Autorangeoption;
+}
