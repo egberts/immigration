@@ -123,7 +123,7 @@ links = [
     [2, 14, 0, 'darkgray', 'Easter Border Entrance'],
     [2, 15, 0, 'darkgray', 'Other Border Entrance'],
 
-#    [2, 2, 800000, 'lightgreen', 'Repeat<br>Multiple Attempts'],
+    # [2, 2, 800000, 'lightgreen', 'Repeat<br>Multiple Attempts'],
     #
     [11, 20, 0, 'darkgray', 'Northern Border'],
     [12, 20, 2500000, 'darkgray', 'Southern Border'],
@@ -221,9 +221,9 @@ my_node.line = dict(color='black', width=1)
 my_node.pad = 10
 my_node.thickness = 30
 my_node.hoverinfo = None  # 'none', 'skip'
-#my_node.groups = 5
-#my_node.align = 'right'  # we have too many floating nodes, need node-grouping assist
-#my_node = dict(
+# my_node.groups = 5
+# my_node.align = 'right'  # we have too many floating nodes, need node-grouping assist
+# my_node = dict(
 #    pad=10,
 #    # thickness = 30,
 #    line=dict(
@@ -233,7 +233,7 @@ my_node.hoverinfo = None  # 'none', 'skip'
 #    # align='right'  # we have too many floating nodes, need grouping support
 #    label=df_nodes['Label'].dropna(axis=0, how='any'),
 #    color=df_nodes['Color']
-#)
+# )
 
 my_sankey = plotly.graph_objs.Sankey()
 my_sankey.arrangement = 'freeform'  # 'perpendicular', 'snap', 'fixed', 'freeform'
@@ -245,7 +245,7 @@ my_sankey.node = my_node
 
 my_layout = plotly.graph_objs.Layout()
 my_layout.title = "US Border Encounters & Enforcement 2022"
-#my_layout.height = 772
+# my_layout.height = 772
 my_layout.font = dict(size=16)
 
 fig = plotly.graph_objs.Figure(data=[my_sankey], layout=my_layout)
@@ -263,8 +263,8 @@ fig.layout.yaxis = {
     'visible': False,  # numbers below
 }
 fig.layout.autosize = True
-#fig.layout.width = 640*1.8
-#fig.layout.height = 480*1.55
+# fig.layout.width = 640*1.8
+# fig.layout.height = 480*1.55
 fig.layout.plot_bgcolor = 'rgba(0,0,0,0)'
 fig.layout.margin = {'l': 25, 'r': 75, 't': 70, 'b': 0}
 for x_coordinate, column_name in enumerate(["Entrances", "Encounters", "Court Processing", "End Results"]):

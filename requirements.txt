@@ -1,1 +1,3 @@
 kalaido
+panda
+plotly
