@@ -3,7 +3,7 @@
 # Sources:
 # * https://www.uscis.gov/citizenship-resource-center/naturalization-statistics
 # * https://www.uscis.gov/tools/reports-and-studies/immigration-and-citizenship-data/eligible-to-naturalize-dashboard
-
+# * https://www.uscis.gov/military/military-naturalization-statistics
 # imports
 import errno
 import pprint
@@ -37,7 +37,7 @@ nodes = [
     ['ID', 'Label', 'Color', 'X', 'Y'],
     [0, 'The World', 'darkorchid', .09, 0.3825],
 
-    [1, custom_wrap('Gotaways 600,000', 12), 'red', 0.48, 0.21],
+    [1, 'Gotaways 600,000', 'red', 0.48, 0.21],
     [96, custom_wrap('Gotaway 600,000', 12), 'red', 1, 0.48],
     [2, 'Entrances<br>3,300,004', '#7f8600', 0.18, .42],
     [
@@ -78,8 +78,8 @@ nodes = [
 
     [20, 'Encounters', 'darkgray', .38, .385],
 
-    [30, 'Title 42', 'red', .48, .2775],
-    [31, 'Title 8', '#7f8600', .48, .415],
+    [30, 'Title 42: 565,000', 'red', .48, .2775],
+    [31, 'Title 8<br>965,000', '#7f8600', .48, .415],
     [
         97,
         custom_wrap('Deported (Removal Order)', 13),
@@ -103,6 +103,7 @@ nodes = [
         'goldenrod', .56, .48
     ],
     [44, 'Other*', 'purple', .56, .63],
+    [49, 'Military', 'blue', .56, .66],
 
     [47, 'Denied', 'black', .48, .535],
     [48, 'Added to Backlog', 'lightsalmon', .48, .69],
@@ -173,6 +174,7 @@ links = [
     [46, 98, 18000, 'rgba(127, 194, 65, 0.2)', 'Approved'],
     [47, 97, 18000, 'red', 'Denied'],
     [48, 99, 415000, 'orange', 'AAA Added to Backlog'],
+    [49, 50, 12140, 'blue', 'US Military'],
 
     [50, 60, 100000, 'gray', 'Processed'],
     [50, 99, 1350000, 'yellow', 'Added to Backlog'],

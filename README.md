@@ -2,12 +2,19 @@
 
 Working on:
 
-   matplotlib-sankey-immigration.py
-   
-Learning matplotlib's `sankey.add()`
+   plotly-sankey-immigration.py
 
-Mastered .dot
+[Rattner](docs/Rattner_11_16_CHART1.png)
 
-When it came down to brass tack, the node placement started going all over the place in random fashion.  This is the dark pattern of selling the commercial Plotly version.
+Sources:
 
-Moving on to other Sankey library as Plotly.Sankey cannot handle more than 12 nodes (and most likely a bit less).
+* U.S. Customs & Border Protection
+* U.S. Border Patrol
+* U.S. Office of Field Operations
+* TRAC
+* USCIS
+* * https://www.uscis.gov/citizenship-resource-center/naturalization-statistics
+* * https://www.uscis.gov/tools/reports-and-studies/immigration-and-citizenship-data/eligible-to-naturalize-dashboard
+* * https://www.uscis.gov/military/military-naturalization-statistics
+* DHS 
+
