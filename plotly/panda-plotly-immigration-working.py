@@ -1,3 +1,9 @@
+# Sankey chart for US Immigration & Deportation 2023
+#
+# Sources:
+# * https://www.uscis.gov/citizenship-resource-center/naturalization-statistics
+# * https://www.uscis.gov/tools/reports-and-studies/immigration-and-citizenship-data/eligible-to-naturalize-dashboard
+
 # imports
 import errno
 import pprint
@@ -184,8 +190,8 @@ links = [
     [97, 0, 1345500, 'lightgreen', 'Deported'],
 
     [98, 100, 18000, 'yellowgreen', 'Formal Relief'],
-    [99, 100, 600000, 'lightgreen', 'Accepted'],
-    # [99, 31, 28000000, 'yellowgreen', 'WAITING'],
+    [99, 100, 600000, 'lightgreen', 'Naturalized'],
+    # [99, 31, 28000000, 'yellowgreen', 'WAITING'],  # Uncomment for a BIG surprise!
     [100, 110, 878500, 'lightblue', 'Citizenship'],
 ]
 
@@ -246,17 +252,6 @@ my_node = plotly.graph_objs.sankey.Node(
     hoverinfo=None  # 'none', 'skip'
     # my_node.groups = 5
     # my_node.align = 'right'  # we have too many floating nodes, need node-grouping assist
-    # my_node = dict(
-    #    pad=10,
-    #    # thickness = 30,
-    #    line=dict(
-    #        color="black",
-    #        width=0
-    #    ),
-    #    # align='right'  # we have too many floating nodes, need grouping support
-    #    label=df_nodes['Label'].dropna(axis=0, how='any'),
-    #    color=df_nodes['Color']
-    # )
 )
 
 my_sankey = plotly.graph_objs.Sankey(
@@ -285,17 +280,17 @@ text_font = plotly.graph_objs.layout.Font(
     size=24
 )
 title_font = plotly.graph_objs.layout.Font(
-    size=24
+    size=32
 )
 my_title = plotly.graph_objs.layout.Title(
     skip_invalid=True,
-    text="US Border Encounters & Enforcement 2022",
+    text="US Border Encounters & Enforcement 2023",
     font=title_font,
 )
 
 my_layout = plotly.graph_objs.Layout(
     title=my_title,
-    titlefont={'size': 32},  # layout.title.Font() is broken for `.size`
+    titlefont={'size': 32},  # layout.title.Font().size is broken for `.size`
     font=text_font,
     margin=my_margin,
     xaxis=my_xaxis,
@@ -334,8 +329,10 @@ for x_coordinate, column_name in enumerate(["Entrances", "Encounters", "Court Pr
         ),
         align="center",
     )
-fig.add_annotation(x=0.25, y=0.75, text='8', showarrow=False)
-fig.add_annotation(x=0.75, y=0.25, text='4', textangle=-90, showarrow=False)
+# To slap annotations all over the char, use following examples
+fig.add_annotation(x=0.24, y=0.74, text='8', showarrow=False)
+fig.add_annotation(x=0.25, y=0.75, text='<a href="https://egbert.net/">8</a>', showarrow=False)
+# fig.add_annotation(x=0.75, y=0.25, text='4', textangle=-90, showarrow=False)
 
 plotly.offline.plot(fig, show_link=False)
 
