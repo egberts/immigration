@@ -1,5 +1,6 @@
 import plotly.graph_objs.sankey
 
+pgosk_indent = 0
 
 def print_annotation(idx, my_annotation: plotly.graph_objs.layout.Annotation()):
     # plotly.graph_objs.Annotation() obsoleted
@@ -329,3 +330,13 @@ def print_layout(my_layout: plotly.graph_objs.Layout()) -> None:
     print('my_layout.yaxis.autorange: ', my_layout.yaxis.autorange)
     print('my_layout.yaxis.autorangeoptions: ', my_layout.yaxis.autorangeoptions)
     print('my_layout.yaxis.autotickangles: ', my_layout.yaxis.autotickangles)
+
+
+def print_domain(my_domain: plotly.graph_objs.sankey.Domain()) -> None:
+    print("my_domain.plotly_name: ", my_domain.plotly_name)
+    print("my_domain.parent: ", my_domain.parent)
+    print("my_domain.figure: ", my_domain.figure)
+    print("my_domain.row: ", my_domain.row)
+    print("my_domain.column: ", my_domain.column)
+    print("my_domain.x: ", my_domain.x)
+    print("my_domain.y: ", my_domain.y)

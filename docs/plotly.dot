@@ -22,9 +22,9 @@ Link -> Line;
 _Node -> Line;
 _Node -> Hoverlabel;
 
-Layout -> Annotation, Margin, Legend, Font, Title, Xaxis, Yaxis;
+Layout -> Annotations, Margin, Legend, Font, Title, Xaxis, Yaxis;
 
-Annotation -> Hoverlabel;
+Annotations -> Hoverlabel;
 
 Hoverlabel -> Font;
 
